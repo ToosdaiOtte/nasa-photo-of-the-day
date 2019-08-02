@@ -1,14 +1,26 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
+import styled from 'styled-components';
 import Title from './components/Title';
+import Date from './components/Date';
 import Img from './components/Img';
 import Explanation from './components/Explanation';
 import "./App.css";
 
+const Container = styled.div`
+  margin: 0 auto;
+  width: 50%;
+  box-sizing: border-box;
+  padding-top: 5%;
+`;
+
 function App() {
+
+  // const [data, setData] = useState();
 
   const [img, setImg] = useState();
   const [title, setTitle] = useState();
+  const [date, setDate] = useState();
   const [x, setX] = useState();
 
   useEffect(() => {
@@ -17,11 +29,13 @@ function App() {
         console.log(result.data)
         setImg(result.data.url);
         setTitle(result.data.title);
+        setDate(result.data.date);
         setX(result.data.explanation);
+        // setData(result.data);
 
-      }) .catch ((error) => {
+      }).catch ((error) => {
         console.log(error)
-      })
+      });
   }, []);
 
   return (
@@ -30,11 +44,12 @@ function App() {
         app! Have fun 🚀!
       </p>
     </div> */
-    <div className="header">
+    <Container className="cardContainer">
       <Img src={img} />
       <Title title={title} />
+      <Date date={date} />
       <Explanation info={x} />
-    </div>
+    </Container>
   );
 }
 
