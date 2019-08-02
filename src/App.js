@@ -16,22 +16,22 @@ const Container = styled.div`
 
 function App() {
 
-  // const [data, setData] = useState();
+  const [data, setData] = useState({});
 
-  const [img, setImg] = useState();
-  const [title, setTitle] = useState();
-  const [date, setDate] = useState();
-  const [x, setX] = useState();
+  // const [img, setImg] = useState();
+  // const [title, setTitle] = useState();
+  // const [date, setDate] = useState();
+  // const [x, setX] = useState();
 
   useEffect(() => {
     axios.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
       .then( result => {
         console.log(result.data)
-        setImg(result.data.url);
-        setTitle(result.data.title);
-        setDate(result.data.date);
-        setX(result.data.explanation);
-        // setData(result.data);
+        // setImg(result.data.url);
+        // setTitle(result.data.title);
+        // setDate(result.data.date);
+        // setX(result.data.explanation);
+        setData(result.data);
 
       }).catch ((error) => {
         console.log(error)
@@ -45,10 +45,10 @@ function App() {
       </p>
     </div> */
     <Container className="cardContainer">
-      <Img src={img} />
-      <Title title={title} />
-      <Date date={date} />
-      <Explanation info={x} />
+      <Img src={data.url} />
+      <Title title={data.title} />
+      <Date date={data.date} />
+      <Explanation info={data.explanation} />
     </Container>
   );
 }
